@@ -1,0 +1,24 @@
+extends layout
+
+block content
+	h2 Views
+	table
+		thead
+			tr
+				td Name
+				td Status
+				td Date
+				td Summary
+		tbody
+			each view in vfg.views
+				tr
+					td
+						a(href='/views/' + view.name)= view.name
+					td= view.status
+					td= view.date
+					td= view.description
+					td
+						a(href='/views/' + view.name + '/show') Show
+			tr
+				td
+					a(href="/views/new") Create new view

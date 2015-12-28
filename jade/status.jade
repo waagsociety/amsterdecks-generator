@@ -1,0 +1,13 @@
+extends layout
+block content
+	h1 status of vectorfield generator
+	table
+		thead
+			tr
+				td component
+				td status
+		tbody
+			for status, item in vfg.status
+				tr
+					td= item
+					td= status

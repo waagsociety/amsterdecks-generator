@@ -1,0 +1,23 @@
+- var view = vfg.views[name], viewPath = '/views/' + view.diskName + '/'
+
+doctype html
+html
+  head
+    script(src='/js/parseQueryString.js')
+    script(src="/md/constants.js")
+    script(src=viewPath + 'clip.js')
+    script(src=viewPath + 'meta.js')
+    script(src=viewPath + 'contaminators.js')
+    script(src=viewPath + 'settings.js')
+    script(src="/md/adapter.js")
+    script(src="/md/functions.js")
+    script(src="/md/hsl2rgb.js")
+    script(src="/md/particle.js")
+    script(src="/md/grid.js")
+    script(src="/md/fieldsLoader.js")
+    script(src="/md/MotionDisplay.js")
+    script(src="/md/initMotionDisplay.js")
+    link(rel="stylesheet", href="/show.css")
+    link(rel="stylesheet", href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css")
+    script(src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js")
+  body

@@ -1,0 +1,13 @@
+extends layout
+block content
+	h1 Polygons loaded
+	table
+		thead
+			tr
+				td gml_id
+				td geo
+		tbody
+			for polygon, i in vfg.polygons
+				tr
+					td= polygon.properties.gml_id
+					td= polygon.geometry.coordinates

@@ -1,0 +1,18 @@
+extends layout
+
+block content
+	- var view = vfg.views[name]
+	h1=name
+	p=description
+	h2=view.status
+	p=new Date(view.requested).toString().substring(0, 21)
+	div.map(data-bounds=JSON.stringify(view.bounds), data-resolution=view.resolution)
+	if view.status === 'complete'
+		#methods
+			a(href=('/views/' + name + '/show')) View
+			a(href=('/views/' + name + '/edit')) Edit
+	ul#log
+		each item in view.log
+			li
+				span.date= item.date.toString().substring(0,21) + ' '
+				span.message= item.message

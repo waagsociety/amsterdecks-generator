@@ -1,0 +1,32 @@
+{
+  "name": "vectorfield-generator",
+  "version": "0.0.0",
+  "description": "generates vector fields",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/waagsociety/amsterdecks-vectorfield-generator.git"
+  },
+  "author": "Ivo de Kler <ivo.de.kler@gmail.com> (http://github.com/w0ps)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/waagsociety/amsterdecks-vectorfield-generator/issues"
+  },
+  "homepage": "https://github.com/waagsociety/amsterdecks-vectorfield-generator",
+  "dependencies": {
+    "async": "^1.3.0",
+    "body-parser": "^1.13.2",
+    "canvas": "^1.2.3",
+    "express": "^4.13.1",
+    "geojson": "^0.2.1",
+    "geojson-utils": "^1.1.0",
+    "geojson2shape": "^0.2.4",
+    "gzippo": "^0.2.0",
+    "jade": "^1.11.0",
+    "ramda": "^0.15.1",
+    "underscore": "^1.8.3"
+  }
+}

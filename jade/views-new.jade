@@ -1,0 +1,89 @@
+extends layout
+
+block content
+	- var existingView = vfg.views[name] || {}
+	h1 Create new view
+	form(method="post", action="/views/new")
+		#grid
+			label(for="name") Name
+			br 
+			input(name="name", value=existingView.name, required)
+			br
+			label(for="description") Description
+			br
+			textarea(name="description")= existingView.description
+			br
+			label(for="contaminators") Contaminator size (m)
+			br
+			input(name="contaminatorSize", type="number", step="any", min=0, value=existingView.contaminatorSize)
+			br
+			- var dimensions = ['Lng', 'Lat']
+			- var extremes = ['min', 'max']
+			each dimension in dimensions
+				- var min = vfg.bounds['min' + dimension]
+				- var max = vfg.bounds['max' + dimension]
+				- var values = { min: min, max: max }
+				each extreme in extremes
+					label= extreme + dimension
+					br
+					input.boundchanger(type="range", name=extreme + dimension + 'Range', min=min, max=max, step="any", value=existingView.bounds ? existingView.bounds[extremes.indexOf(extreme)][dimensions.indexOf(dimension)] : values[extreme], oninput='this.form.' + extreme + dimension + 'Input.value=this.value')
+					br
+					input.boundchanger(type="number", name=extreme + dimension + 'Input', min=min, max=max, step="any", value=existingView.bounds ? existingView.bounds[extremes.indexOf(extreme)][dimensions.indexOf(dimension)] : values[extreme], oninput='this.form.' + extreme + dimension + 'Input.value=this.value')
+					br
+			br
+			h3 Subdivision
+			br
+			select
+				option x/y specified
+				option(selected) grid cells per meter
+			br
+			label x cells
+			br
+			input(name="x cells", type="number", min="1", step="1")
+			br
+			label y cells
+			br
+			input(name="y cells", type="number", min="1", step="1")
+			br
+			label meters per grid cell
+			br
+			input(name="resolution", type="number", value=+existingView.resolution)
+			br
+			ul#info
+				li
+					span area: 
+					span#area
+				li
+					span x divisions: 
+					span#dimsX
+				li
+					span y divisions: 
+					span#dimsY
+				li
+					span # cells: 
+					span#cells
+			br
+			label border effect distance straight (m)
+			br
+			input(name="borderstraightdistance", type="number", min="0", step="any", value=+existingView.borderStraightDistance)
+			br
+			label border effect distance falloff (m)
+			br
+			input(name="borderfalloffdistance", type="number", min="0", step="any", value=+existingView.borderFalloffDistance)
+			#variants
+				h3 Variants
+				each variant in ['avg', 'wet', 'dry']
+					if existingView.name
+						input(type="checkbox", name= variant, checked=existingView.variants ? existingView.variants.indexOf(variant) > -1 : true)
+					else
+						input(type="checkbox", name= variant, checked= variant === 'avg' ? true : false)
+					label= variant 
+			br
+			label polygon whitelist
+			br
+			textarea(name="whitelist")= existingView.whitelist ? existingView.whitelist.join(', ') : ''
+			br
+			br
+			input(type="submit", value=(existingView.name ? "Update" : "Create") + ' view')
+		#map(data-minlng=vfg.bounds.minLng, data-maxlng=vfg.bounds.maxLng, data-minlat=vfg.bounds.minLat, data-maxlat=vfg.bounds.maxLat)
+	script(src="/createView.js")
